@@ -11,9 +11,6 @@
         }
 
 
-
-
-
         @media (orientation:landscape) {
             #content #img {
                 height: 100vh;
@@ -44,6 +41,14 @@
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: center;
+                border: solid white;
+            }
+            #btnChange {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                text-align: center;
+                width: 100%;
             }
         }
 
@@ -78,10 +83,49 @@
                 background-repeat: no-repeat;
                 background-position: center;
             }
+
+            #btnChange {
+                position: fixed;
+                bottom: 10px;
+                left: 0;
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+
+
+        #btnChange button {
+            background-color: #8ab69e;
+            border: solid 3px white;
+            height: 50px;
+            width: 100px;
+            font-size: 10px;
+            color: white!important;
+            border-radius: 10px;
+            fill: white;
+        }
+        #content button:active,#content button:focus{
+            border-color: white;
+            outline: none;
         }
 
         #content {
             text-align: center;
+            background-color: black;
+        }
+        #content > button{
+            background-color: black;
+        }
+        #download{
+            background-color: black!important;
+            position: absolute;
+            border-radius: 50px;
+            fill: greenyellow;
+            color: red;
+            top: 10;
+            right: 10;
+
         }
     </style>
     <script>
@@ -106,6 +150,7 @@
             var newId = imgIdStr.length == 1 ? "000" + imgId : imgIdStr.length == 2 ? "00" + imgId : imgIdStr.length == 3 ? "0" + imgId : "";
             // img.src = "img/dsc" + newId + ".jpg";
             img.style = 'background-image:url(img/dsc' + newId + '.jpg)';
+            document.getElementById('download').href = './img/dsc' + newId + '.jpg';
         }
         function createMiniatureButtons() {
             var imgs;
@@ -138,9 +183,74 @@
     <div id="miniaturas">
     </div>
     <div id="content">
-        <button type="button" onclick="changeImg('remove')">ANT</button>
-        <button type="button" onclick="changeImg('add')">SIG</button>
-        <br>
+        <div id="btnChange">
+            <button type="button" onclick="changeImg('remove')">
+
+                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 0 512.000000 512.000000"
+                    preserveAspectRatio="xMidYMid meet">
+
+                    <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                        >
+                        <path d="M2330 5110 c-494 -48 -950 -230 -1350 -538 -195 -150 -448 -432 -594
+           -662 -63 -99 -186 -351 -230 -471 -49 -134 -102 -340 -128 -499 -31 -195 -31
+           -565 0 -760 45 -276 116 -498 237 -745 132 -269 269 -460 489 -681 221 -220
+           412 -357 681 -489 247 -121 469 -192 745 -237 195 -31 565 -31 760 0 276 45
+           498 116 745 237 269 132 460 269 681 489 220 221 357 412 489 681 88 179 132
+           296 180 476 63 240 78 371 78 649 0 278 -15 409 -78 649 -48 180 -92 297 -180
+           476 -132 269 -269 460 -489 681 -221 220 -412 357 -681 489 -246 121 -474 193
+           -740 235 -147 23 -475 34 -615 20z m740 -1291 c24 -11 53 -28 64 -37 30 -26
+           66 -113 66 -157 -1 -87 -17 -106 -508 -597 l-467 -468 467 -467 c491 -492 508
+           -512 508 -598 0 -42 -29 -116 -58 -149 -26 -30 -113 -66 -157 -66 -87 1 -102
+           13 -668 578 -296 295 -553 557 -570 582 -29 41 -32 52 -32 120 0 68 3 79 32
+           120 17 25 274 287 570 582 566 565 581 578 668 578 22 0 60 -10 85 -21z" />
+                    </g>
+                </svg>
+            </button>
+            <button type="button" onclick="changeImg('add')">
+                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.000000 512.000000"
+                    preserveAspectRatio="xMidYMid meet" height="40px">
+
+                    <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                        stroke="none">
+                        <path d="M2330 5110 c-494 -48 -950 -230 -1350 -538 -195 -150 -448 -432 -594
+           -662 -63 -99 -186 -351 -230 -471 -49 -134 -102 -340 -128 -499 -31 -195 -31
+           -565 0 -760 45 -276 116 -498 237 -745 132 -269 269 -460 489 -681 221 -220
+           412 -357 681 -489 247 -121 469 -192 745 -237 195 -31 565 -31 760 0 276 45
+           498 116 745 237 269 132 460 269 681 489 220 221 357 412 489 681 88 179 132
+           296 180 476 63 240 78 371 78 649 0 278 -15 409 -78 649 -48 180 -92 297 -180
+           476 -132 269 -269 460 -489 681 -221 220 -412 357 -681 489 -246 121 -474 193
+           -740 235 -147 23 -475 34 -615 20z m-110 -1291 c34 -15 175 -150 583 -557 296
+           -295 553 -557 570 -582 29 -41 32 -52 32 -120 0 -68 -3 -79 -32 -120 -17 -25
+           -274 -287 -570 -582 -566 -565 -581 -577 -668 -578 -44 0 -131 36 -157 66 -29
+           33 -58 107 -58 149 0 86 17 106 508 598 l467 467 -467 468 c-491 491 -508 511
+           -508 597 0 42 29 116 58 149 26 30 113 66 157 66 22 0 60 -10 85 -21z" />
+                    </g>
+                </svg>
+            </button>
+        </div>
+        <a id="download" type="button" href="" download>
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ height="70px" viewBox="0 0 512.000000 512.000000"
+ preserveAspectRatio="xMidYMid meet">
+
+<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+ stroke="none">
+<path d="M2321 5110 c-1340 -130 -2361 -1283 -2318 -2620 13 -389 97 -726 268
+-1069 249 -502 647 -900 1150 -1150 815 -406 1779 -350 2539 147 297 194 579
+482 771 788 74 116 184 342 234 478 51 138 110 376 131 531 23 157 26 521 6
+660 -59 415 -191 769 -410 1099 -92 140 -185 254 -315 385 -399 403 -895 653
+-1462 737 -122 18 -466 26 -594 14z m317 -686 c47 -19 88 -58 113 -106 18 -36
+19 -72 19 -1003 0 -531 3 -965 8 -965 4 0 120 113 257 250 232 233 254 252
+303 266 66 20 115 12 177 -27 52 -33 95 -109 95 -169 0 -94 6 -87 -468 -563
+-246 -247 -463 -457 -482 -467 -54 -27 -96 -33 -153 -20 -51 12 -64 24 -506
+464 -304 303 -459 464 -472 491 -24 51 -24 128 0 181 31 68 117 124 191 124
+76 0 98 -16 360 -277 141 -139 259 -253 263 -253 4 0 7 434 7 965 0 931 1 967
+19 1003 53 102 169 148 269 106z m816 -3095 c162 -41 210 -254 83 -366 -20
+-18 -53 -37 -74 -42 -52 -15 -1754 -15 -1806 0 -21 5 -54 24 -74 42 -124 109
+-82 315 74 364 52 16 1734 18 1797 2z"/>
+</g>
+</svg>
+        </a>
         <button id="img" type="button"></button>
     </div>
 </body>
