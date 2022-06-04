@@ -114,10 +114,10 @@
                 imgs = data;
                 data.forEach(element => {
                     let img = document.createElement('img');
-                    img.src = 'img/miniaturas/' + element;
+                    img.src = 'img/Miniaturas/' + element;
                     let button = document.createElement('button');
                     button.type = 'button';
-                    button.style = 'background-image:url(img/miniaturas/' + element + ')';
+                    button.style = 'background-image:url(img/Miniaturas/' + element + ')';
                     button.onclick = function () {
                         changeImg(element.toString().replace('dsc', '').replace('_1.jpg', ''));
                     }
