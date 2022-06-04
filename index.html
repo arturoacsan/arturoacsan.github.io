@@ -5,25 +5,144 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        html {
+            background-color: black !important;
+        }
+
+
+
+
+
+        @media (orientation:landscape) {
+            #content #img {
+                height: 100vh;
+                width: 70vw;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            #content {
+                width: 70%;
+                position: fixed;
+                right: 0;
+            }
+
+            #miniaturas {
+                position: fixed;
+                left: 0;
+                width: 30% !important;
+                height: 100%;
+                overflow: scroll;
+            }
+
+            #miniaturas button {
+                width: 200px;
+                height: 200px;
+                background-color: black !important;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+
+        @media (orientation:portrait) {
+            #content #img {
+                height: 65vh;
+                width: 100vw;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            #content {
+                height: 65%;
+                position: fixed;
+                top: 0;
+            }
+
+            #miniaturas {
+                position: fixed;
+                bottom: 0;
+                height: 30% !important;
+                width: 100%;
+                overflow: scroll;
+            }
+
+            #miniaturas button {
+                width: 120px;
+                height: 120px;
+                background-color: black !important;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+
+        #content {
+            text-align: center;
+        }
+    </style>
     <script>
-        let imgId = 1;
-        function changeImg() {
+        let imgId = 0;
+        function changeImg(v) {
+            if (v == 'add') {
+                if (imgId == 189)
+                    imgId = 1;
+                else
+                    imgId++;
+            } else if (v == 'remove') {
+                if (imgId == 1)
+                    imgId = 189;
+                else
+                    imgId--;
+            } else {
+                imgId = parseInt(v);
+            }
+            console.log(imgId + '12');
             var img = document.getElementById('img');
             imgIdStr = imgId.toString();
             var newId = imgIdStr.length == 1 ? "000" + imgId : imgIdStr.length == 2 ? "00" + imgId : imgIdStr.length == 3 ? "0" + imgId : "";
-            img.src = "img/dsc" + newId + ".jpg";
-            console.log(img);
-            imgId++;
-            if(imgId>189)
-                imgId=1;
+            // img.src = "img/dsc" + newId + ".jpg";
+            img.style = 'background-image:url(img/dsc' + newId + '.jpg)';
         }
+        function createMiniatureButtons() {
+            var imgs;
+            var divMiniaturas = document.getElementById('miniaturas');
+            fetch('./data/miniaturas.json').then(response => response.json()).then(function (data) {
+                imgs = data;
+                data.forEach(element => {
+                    let img = document.createElement('img');
+                    img.src = 'img/miniaturas/' + element;
+                    let button = document.createElement('button');
+                    button.type = 'button';
+                    button.style = 'background-image:url(img/miniaturas/' + element + ')';
+                    button.onclick = function () {
+                        changeImg(element.toString().replace('dsc', '').replace('_1.jpg', ''));
+                    }
+                    // button.appendChild(img);
+                    divMiniaturas.appendChild(button);
+                });
+            }).catch(error => console.log(error));
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+
+            createMiniatureButtons();
+            changeImg(1);
+        }, false);
     </script>
 </head>
 
 <body>
-    Ami :2
-    <button type="button" onclick="changeImg()">TEST</button>
-    <img id="img" />
+    <div id="miniaturas">
+    </div>
+    <div id="content">
+        <button type="button" onclick="changeImg('remove')">ANT</button>
+        <button type="button" onclick="changeImg('add')">SIG</button>
+        <br>
+        <button id="img" type="button"></button>
+    </div>
 </body>
 
 </html>
