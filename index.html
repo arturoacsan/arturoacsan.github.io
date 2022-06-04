@@ -1,12 +1,29 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        let imgId = 1;
+        function changeImg() {
+            var img = document.getElementById('img');
+            imgIdStr = imgId.toString();
+            var newId = imgIdStr.length == 1 ? "000" + imgId : imgIdStr.length == 2 ? "00" + imgId : imgIdStr.length == 3 ? "0" + imgId : "";
+            img.src = "img/dsc" + newId + ".jpg";
+            console.log(img);
+            imgId++;
+            if(imgId>189)
+                imgId=1;
+        }
+    </script>
 </head>
+
 <body>
     Ami :v
-    <img src="img/dsc0001.jpg"/>
+    <button type="button" onclick="changeImg()">TEST</button>
+    <img id="img" />
 </body>
+
 </html>
